@@ -6,7 +6,7 @@ const sources = require('./sources');
 const path = require('path');
 const YNABHeadings = ['Date', 'Payee', 'Category', 'Memo', 'Outflow', 'Inflow'];
 
-//Default optionss
+//Default options
 let options;
 let sourceConfig;
  
@@ -125,7 +125,7 @@ function getCSVRows(data){
             reject(Error('CSV file is empty')); return;
         }
 
-        const rows = data.toString().replace(/\r/g, '').split('\n').filter( row => !!row );
+        const rows = data.toString().replace(/\r/g, '\n').replace(/\n\n/g, '\n').split('\n').filter( row => !!row );
         const headerCells = rows.shift().split( options.delimitor ).filter( cell => !!cell );
 
         //Check if any data rows
