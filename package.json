@@ -38,10 +38,10 @@
   },
   "devDependencies": {
     "chai": "^3.5.0",
-    "coveralls": "^2.11.14",
+    "coveralls": "^3.0.6",
     "eslint": "^3.8.1",
     "fs-extra": "^0.30.0",
-    "mocha": "^3.1.2",
+    "mocha": "^6.2.0",
     "nyc": "^14.1.1"
   }
 }
