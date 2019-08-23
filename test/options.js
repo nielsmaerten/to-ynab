@@ -22,7 +22,7 @@ describe("Options", () => {
                 output: config.testDir + '/nordea',
                 source: 'nordea'
             }).then( (result) => {
-                assert.equal(result, `File ${config.testDir}/nordea.csv written successfully!`);
+                assert.include(result, `nordea.csv written successfully!`);
                 assert.isOk(fs.existsSync(config.testDir + '/nordea.csv'), 'File was generated in test folder');
             });
         });
@@ -45,7 +45,7 @@ describe("Options", () => {
             return ynab_generator(`./${config.testDir}/${config.testFiles[0]}`, {
                 output: config.testDir
             }).then( (result) => {
-                assert.equal(result, `File ${config.testDir}/ynab.csv written successfully!`);
+                assert.include(result, `ynab.csv written successfully!`);
                 assert.isOk(fs.existsSync(config.testDir + '/ynab.csv'), 'File was generated in test folder');
             });
         });
@@ -54,7 +54,7 @@ describe("Options", () => {
             return ynab_generator(`./${config.testDir}/${config.testFiles[0]}`, {
                 output: config.testDir + '/test.csv'
             }).then( (result) => {
-                assert.equal(result, `File ${config.testDir}/test.csv written successfully!`);
+                assert.include(result, `test.csv written successfully!`);
                 assert.isOk(fs.existsSync(config.testDir + '/test.csv'), 'File was generated in test folder');
             });
         });
@@ -63,7 +63,7 @@ describe("Options", () => {
             return ynab_generator(`./${config.testDir}/${config.testFiles[0]}`, {
                 output: config.testDir + '/test.v1'
             }).then( (result) => {
-                assert.equal(result, `File ${config.testDir}/test.v1.csv written successfully!`);
+                assert.include(result, `test.v1.csv written successfully!`);
                 assert.isOk(fs.existsSync(config.testDir + '/test.v1.csv'), 'File was generated in test folder');
             });
         });
@@ -74,7 +74,7 @@ describe("Options", () => {
             return ynab_generator(`./${config.testDir}/${config.testFiles[0]}`, {
                 output: config.testDir
             }).then( (result) => {
-                assert.equal(result, `File ${config.testDir}/ynab.csv written successfully!`);
+                assert.include(result, `ynab.csv written successfully!`);
                 assert.isOk(fs.existsSync(config.testDir + '/ynab.csv'), 'File was generated in test folder');
             });
         });
@@ -83,7 +83,7 @@ describe("Options", () => {
             return ynab_generator(`./${config.testDir}/${config.testFiles[0]}`, {
                 output: config.testDir + '/test.csv'
             }).then( (result) => {
-                assert.equal(result, `File ${config.testDir}/test.csv written successfully!`);
+                assert.include(result, `test.csv written successfully!`);
                 assert.isOk(fs.existsSync(config.testDir + '/test.csv'), 'File was generated in test folder');
             });
         });
@@ -92,7 +92,7 @@ describe("Options", () => {
             return ynab_generator(`./${config.testDir}/${config.testFiles[0]}`, {
                 output: config.testDir + '/test.v1'
             }).then( (result) => {
-                assert.equal(result, `File ${config.testDir}/test.v1.csv written successfully!`);
+                assert.include(result, `test.v1.csv written successfully!`);
                 assert.isOk(fs.existsSync(config.testDir + '/test.v1.csv'), 'File was generated in test folder');
             });
         });
@@ -232,7 +232,7 @@ describe("Options", () => {
                 output: config.testDir,
                 csvstring: true
             }).then( (result) => {
-                assert.equal(result, `File ${config.testDir}/ynab.csv written successfully!`);
+                assert.include(result, `ynab.csv written successfully!`);
                 assert.isOk(fs.existsSync(config.testDir + '/ynab.csv'), 'File was generated in test folder');
             });
         });
