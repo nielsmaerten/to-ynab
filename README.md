@@ -1,3 +1,5 @@
+### This is a fork. Original Repo: <https://github.com/cosminlupu/to-ynab>
+
 to-ynab
 ====
 _by @cosminlupu_
@@ -17,6 +19,21 @@ _by @cosminlupu_
 
 * Support for more .csv sources ( Currently only Nordea bank )
 * Support for own source config via a json file
+
+### Things I (Niels) would like to add
+
+* Support for YNAB API: Push transactions immediately into YNAB
+* Interactive CLI
+  * Download bank CSV files into `dir/`
+  * `cd dir/`
+  *  `npx to-ynab`
+  * For each CSV file the tool finds:
+    * If user has not passed --source option, auto-detect source by comparing Header rows
+    * User confirms source, selects different source, or chooses to skip file
+    * Transactions are extracted
+    * User selects 'Budget' in a list fetched from YNAB API
+    * User selects 'Account'
+    * Transactions are uploaded to YNAB
 
 ## How to install
 To use _to-ynab_ via cli, install it globally using **npm**:
