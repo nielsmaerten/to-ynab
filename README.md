@@ -18,7 +18,7 @@ _by @cosminlupu_
 ### TODO
 
 * Support for more .csv sources ( Currently only Nordea bank )
-* Support for own source config via a json file
+* ~~Support for own source config via a json file~~
 
 ### Things I (Niels) would like to add
 
