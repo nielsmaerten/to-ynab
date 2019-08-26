@@ -9,8 +9,9 @@ const YNABHeadings = ['Date', 'Payee', 'Category', 'Memo', 'Outflow', 'Inflow'];
 //Default options
 let options;
 let sourceConfig;
- 
-function generate(file, opts){
+let file; 
+
+function generate(_file, opts){
     if(typeof opts === 'undefined'){
         opts = {};
     }
@@ -23,8 +24,11 @@ function generate(file, opts){
         path: '.',
         output: 'ynab',
         csvstring: false,
-        write: true
+        write: true,
+        preserveFilename: false
     };
+
+    file = _file;
 
     return new Promise( (resolve, reject ) => {
         validateOptions(opts)
@@ -37,7 +41,7 @@ function generate(file, opts){
                     options.delimitor = sourceConfig.delimitor;
                 }
             })
-            .then( () => loadFile(file) )
+            .then( loadFile )
             .then( getCSVRows )
             .then( generateCSV )
             .then( writeCSV )
@@ -85,7 +89,7 @@ function validateOptions(opts){
     });
 }
 
-function loadFile(file){
+function loadFile(){
     return new Promise((resolve, reject) => {
 
         //Check if we have a csv string provided
@@ -135,7 +139,7 @@ function getCSVRows(data){
         
         //Check if the csv heading cells are the same as the source config
         if( sourceConfig.headers.length !== headerCells.length || !sourceConfig.headers.every((h,i) => h == headerCells[i]) ) {
-            reject(Error(`CSV headers are not the same as the source config headers. Expected header rows: [ ${sourceConfig.headers.join(options.delimitor)} ]`)); return;
+            reject(Error(`${file}: \nCSV headers are not the same as the source config headers. Expected header rows: [ ${sourceConfig.headers.join(options.delimitor)} ]`)); return;
         }
 
         resolve(rows);
@@ -183,7 +187,14 @@ function writeCSV(data){
             resolve(data); return;
         }
 
-        const filename = path.join(options.path, options.output + '.csv');
+        let filename;
+        // When preserveFilename is true, options.output is used as a prefix
+        if (options.preserveFilename) {
+            filename = path.join(options.path, `${options.output}_${path.basename(file)}`);
+        } else {
+            filename = path.join(options.path, options.output + '.csv');
+        }
+
 
         fs.writeFile(filename, data, (err) => {
             if (err){
