@@ -25,12 +25,19 @@ function generate(_file, opts){
         output: 'ynab',
         csvstring: false,
         write: true,
-        preserveFilename: false
+        preserveFilename: false,
+        ignoreCustomSources: false
     };
 
     file = _file;
 
-    return new Promise( (resolve, reject ) => {
+    // Extend built-in sources if custom ones are available
+    if (!options.ignoreCustomSources) {
+        Object.assign(sources, util.getCustomSources());
+    }
+
+
+    return new Promise((resolve, reject) => {
         validateOptions(opts)
             .then( (opts) => {
                 options = util.extend(options, opts);
@@ -306,6 +313,14 @@ const util = {
         });
 
         return obj3;
+    },
+    getCustomSources: function () {
+        const homedir = require("os").homedir();
+        const sourcesPath = path.join(homedir, "to-ynab-sources.json");
+        if (!fs.existsSync(sourcesPath)) {
+            return {};
+        }
+        return require(sourcesPath);
     }
 };
 
