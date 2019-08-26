@@ -9,6 +9,7 @@
   "scripts": {
     "start": "node ./bin/cli.js",
     "test": "nyc mocha",
+    "coverage:html": "nyc report --reporter=html",
     "coverage": "nyc report --reporter=text-lcov | coveralls",
     "eslint": "eslint index.js sources.js test bin"
   },
@@ -23,7 +24,16 @@
     "bank",
     "nordea"
   ],
-  "author": "Cosmin Lupu <me@cosminlupu.com>",
+  "authors": [
+    {
+      "name": "Cosmin Lupu",
+      "email": "me@cosminlupu.com"
+    },
+    {
+      "name": "Niels Maerten",
+      "url": "https://github.com/nielsmaerten"
+    }
+  ],
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/cosminlupu/to-ynab/issues"
