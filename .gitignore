@@ -1,5 +1,6 @@
 #General
 node_modules
+.history
 .DS_Store
 npm-debug.log
 
