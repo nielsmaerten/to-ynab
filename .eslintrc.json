@@ -5,11 +5,13 @@
         "es6": true,
         "mocha": true
     },
+    "parserOptions": {
+        "ecmaVersion": 8
+    },
     "rules": {
         //Warnings
         "no-extra-semi": 1,
         "no-console": 1,
-        "indent": [1, 4],
         "no-inner-declarations": 1,
         "no-multiple-empty-lines": [1, { "max": 2, "maxEOF": 2 }],
         "arrow-spacing": 1,

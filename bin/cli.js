@@ -7,7 +7,7 @@
 const ynab_generator = require('../index.js');
 const program = require('commander');
 const fs = require("fs");
-const util = require("../util")
+const util = require("../util");
 
 const options = {};
 let files;
@@ -41,7 +41,7 @@ program
 options.path = options.path || process.cwd();
 
 if (!fs.existsSync(options.path)) {
-    console.log(options.path, "does not exist")
+    console.log(options.path, "does not exist");
     program.outputHelp();
     process.exit(1);
 }
@@ -50,10 +50,10 @@ if (!fs.existsSync(options.path)) {
 if (fs.lstatSync(options.path).isDirectory()) {
     files = fs.readdirSync(options.path)
         .filter(file => file.toLowerCase().endsWith(".csv"))
-        .map(file => require("path").join(options.path, file))
-    options.preserveFilename = true
+        .map(file => require("path").join(options.path, file));
+    options.preserveFilename = true;
 } else {
-    files = [options.path]
+    files = [options.path];
 }
 
 (async () => {
@@ -64,8 +64,8 @@ if (fs.lstatSync(options.path).isDirectory()) {
             const result =
                 await util
                     .detectSource(file, options)
-                    .then(d => ynab_generator(d.file, d.opts))
-            console.log(result)
+                    .then(d => ynab_generator(d.file, d.opts));
+            console.log(result);
         } catch (error) {
             console.log("\n", error.toString());
             exitCode = 1;
@@ -73,12 +73,12 @@ if (fs.lstatSync(options.path).isDirectory()) {
     }
 
     if (files.length === 0) {
-        console.log("No CSV files found in", options.path)
+        console.log("No CSV files found in", options.path);
         exitCode = 1;
     }
 
-    if (exitCode !== 0) program.outputHelp();
-    process.exit(exitCode)
+    if (exitCode !== 0) {program.outputHelp();}
+    process.exit(exitCode);
 
 })();
 

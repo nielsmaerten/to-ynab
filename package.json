@@ -11,7 +11,7 @@
     "test": "nyc mocha",
     "coverage:html": "nyc report --reporter=html",
     "coverage": "nyc report --reporter=text-lcov | coveralls",
-    "prettier": "prettier index.js sources.js test bin",
+    "prettier": "prettier index.js util.js sources.js test bin",
     "eslint": "eslint index.js sources.js test bin"
   },
   "repository": {
