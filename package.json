@@ -11,6 +11,7 @@
     "test": "nyc mocha",
     "coverage:html": "nyc report --reporter=html",
     "coverage": "nyc report --reporter=text-lcov | coveralls",
+    "prettier": "prettier index.js sources.js test bin",
     "eslint": "eslint index.js sources.js test bin"
   },
   "repository": {
@@ -50,8 +51,11 @@
     "chai": "^3.5.0",
     "coveralls": "^3.0.6",
     "eslint": "^3.8.1",
+    "eslint-config-prettier": "^6.1.0",
+    "eslint-plugin-prettier": "^3.1.0",
     "fs-extra": "^0.30.0",
     "mocha": "^6.2.0",
-    "nyc": "^14.1.1"
+    "nyc": "^14.1.1",
+    "prettier": "1.18.2"
   }
 }
