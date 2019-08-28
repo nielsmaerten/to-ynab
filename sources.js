@@ -36,7 +36,7 @@ const sources = {
       "Vrije mededeling"
     ],
     map: {
-      date: 7,
+      date: 5,
       payee: null,
       category: null,
       memo: 6,
@@ -67,9 +67,9 @@ const sources = {
     ],
     map: {
       date: 3,
-      payee: 12,
+      payee: null,
       category: null,
-      memo: 15,
+      memo: 12,
       outflow: 10,
       inflow: 10
     },
