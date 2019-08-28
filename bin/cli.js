@@ -61,10 +61,11 @@ if (fs.lstatSync(options.path).isDirectory()) {
     for (let i = 0; i < files.length; i++) {
         const file = files[i];
         try {
-            const data =
-                await util.detectSource(file, options)
+            const result =
+                await util
+                    .detectSource(file, options)
                     .then(d => ynab_generator(d.file, d.opts))
-            console.log(data)
+            console.log(result)
         } catch (error) {
             console.log("\n", error.toString());
             exitCode = 1;

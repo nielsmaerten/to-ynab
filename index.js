@@ -30,14 +30,14 @@ function generate(_file, opts) {
     };
 
     file = _file;
-    sources = util.getSources(opts.ignoreCustomSources)
+    sources = util.getSources(opts.ignoreCustomSources);
 
 
     return new Promise((resolve, reject) => {
         validateOptions(opts)
             .then((opts) => {
-                Object.assign(options, opts)
-                sourceConfig = sources[options.source]
+                Object.assign(options, opts);
+                sourceConfig = sources[options.source];
 
                 //Check if the source provides a delimitor and not overwritten by a provided option
                 if (!opts.delimitor && sourceConfig.delimitor) {
@@ -93,17 +93,17 @@ function validateOptions(opts) {
 }
 
 function loadFile() {
-    return util.loadFile(file, options)
+    return util.loadFile(file, options);
 }
 
 function validateCSV(data) {
     return util.getCSVRows(data).then(rows => {
 
-        const headerCells = util.getHeaderCells(rows, options.delimitor)
+        const headerCells = util.getHeaderCells(rows, options.delimitor);
 
         // Check if any data rows
         if (rows.length < 2 && headerCells.length) {
-            throw new Error('CSV file only contains the header row')
+            throw new Error('CSV file only contains the header row');
         }
 
         //Check if the csv heading cells are the same as the source config
@@ -112,10 +112,10 @@ function validateCSV(data) {
         }
 
         // Discard header row, we no longer need it
-        rows.shift()
+        rows.shift();
 
-        return rows
-    })
+        return rows;
+    });
 }
 
 function generateCSV(rows) {
@@ -159,7 +159,7 @@ function writeCSV(data) {
             resolve(data); return;
         }
 
-        let filename = path.join(options.path, options.output + '.csv');
+        const filename = path.join(options.path, options.output + '.csv');
 
         fs.writeFile(filename, data, (err) => {
             if (err) {
