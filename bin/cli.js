@@ -1,11 +1,13 @@
 #!/usr/bin/env node
 // eslint-disable no-console
+// @ts-check
 
 "use strict";
 
 const ynab_generator = require('../index.js');
 const program = require('commander');
 const fs = require("fs");
+const util = require("../util")
 
 const options = {};
 let files;
@@ -59,10 +61,12 @@ if (fs.lstatSync(options.path).isDirectory()) {
     for (let i = 0; i < files.length; i++) {
         const file = files[i];
         try {
-            const data = await ynab_generator(file, options)
+            const data =
+                await util.detectSource(file, options)
+                    .then(d => ynab_generator(d.file, d.opts))
             console.log(data)
         } catch (error) {
-            console.log("\n",error.toString());
+            console.log("\n", error.toString());
             exitCode = 1;
         }
     }
