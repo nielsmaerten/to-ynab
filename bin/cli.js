@@ -26,11 +26,12 @@ program
     .option('-c, --csvstring', 'Provide a csv string instead of file')
     .option('-n, --no-write', 'Does not write the generated file, it just outputs it.')
     .option('-f, --dateformat [value]', 'Date format for the generated csv. Default: DD/MM/YYYY', 'DD/MM/YYYY')
+    .option('-u, --upload', 'Upload transactions to YNAB')
     .action(p => options.path = p)
     .parse(process.argv);
 
 //Loop options and add them to the options obj
-['source', 'output', 'lastdate', 'payees', 'delimitor', 'csvstring', 'write', 'dateformat']
+['source', 'output', 'lastdate', 'payees', 'delimitor', 'csvstring', 'write', 'dateformat', 'upload']
     .forEach((opt) => {
         if (program.hasOwnProperty(opt)) {
             options[opt] = program[opt];
@@ -60,6 +61,7 @@ if (fs.lstatSync(options.path).isDirectory()) {
     // Process all selected files
     for (let i = 0; i < files.length; i++) {
         const file = files[i];
+        options.input = file;
         try {
             const result =
                 await util

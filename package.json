@@ -11,7 +11,7 @@
     "test": "nyc mocha",
     "coverage:html": "nyc report --reporter=html",
     "coverage": "nyc report --reporter=text-lcov | coveralls",
-    "prettier": "prettier index.js util.js sources.js test bin",
+    "prettier": "prettier *.js test bin",
     "eslint": "eslint index.js sources.js test bin"
   },
   "repository": {
@@ -42,7 +42,9 @@
   "homepage": "https://github.com/cosminlupu/to-ynab#readme",
   "dependencies": {
     "commander": "^2.9.0",
-    "moment": "^2.15.1"
+    "inquirer": "^7.0.0",
+    "moment": "^2.15.1",
+    "ynab": "^1.16.0"
   },
   "engines": {
     "node": ">= 4.0.0"

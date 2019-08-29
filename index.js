@@ -4,6 +4,7 @@ const fs = require("fs");
 const moment = require("moment");
 const path = require("path");
 const util = require("./util");
+const uploadToYnab = require("./upload");
 const YNABHeadings = ["Date", "Payee", "Category", "Memo", "Outflow", "Inflow"];
 
 //Default options
@@ -11,6 +12,7 @@ let options;
 let sourceConfig;
 let sources;
 let file;
+let transactions;
 
 function generate(_file, opts) {
   if (typeof opts === "undefined") {
@@ -26,10 +28,12 @@ function generate(_file, opts) {
     output: "ynab",
     csvstring: false,
     write: true,
-    ignoreCustomSources: false
+    ignoreCustomSources: false,
+    upload: false
   };
 
   file = _file;
+  transactions = [];
   sources = util.getSources(opts.ignoreCustomSources);
 
   return new Promise((resolve, reject) => {
@@ -47,6 +51,7 @@ function generate(_file, opts) {
       .then(validateCSV)
       .then(generateCSV)
       .then(writeCSV)
+      .then(data => uploadToYnab(transactions, options, data))
       .then(resolve)
       .catch(reject);
   });
@@ -163,6 +168,7 @@ function generateCSV(rows) {
       const renderRow = !options.lastdate || date.isSameOrBefore(lastDate);
 
       if (renderRow) {
+        let newTransaction = {};
         YNABHeadings.forEach((h, i) => {
           const heading = h.toLowerCase();
 
@@ -171,10 +177,16 @@ function generateCSV(rows) {
             cells
           );
 
+          newTransaction[heading] = createField[heading](
+            cells[sourceConfig.map[heading]],
+            cells
+          );
+
           if (i !== YNABHeadings.length - 1) {
             newData += ";";
           }
         });
+        transactions.push(newTransaction);
 
         if (y !== rows.length - 1) {
           newData += "\n";
