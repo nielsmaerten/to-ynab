@@ -17,22 +17,22 @@ _by @cosminlupu_
 
 ### TODO
 
-* Support for more .csv sources ( Currently only Nordea bank )
-* ~~Support for own source config via a json file~~
+* ~~Support for more .csv sources ( Currently only Nordea bank )~~ **DONE (sort of): KBC bank Belgium is now supported as well**
+* ~~Support for own source config via a json file~~ **DONE: Put your custom sources in ~/ynab_source.json** 
 
 ### Things I (Niels) would like to add
 
-* Support for YNAB API: Push transactions immediately into YNAB
-* Interactive CLI
+* Support for YNAB API: Push transactions immediately into YNAB (DONE)
+* Auto-detection of source if none is provided (DONE)
+* Interactive CLI (DONE)
   * Download bank CSV files into `dir/`
   * `cd dir/`
-  *  `npx to-ynab`
+  *  `npx to-ynab` (TODO: merge into original to-ynab)
   * For each CSV file the tool finds:
-    * If user has not passed --source option, auto-detect source by comparing Header rows
-    * User confirms source, selects different source, or chooses to skip file
+    * If user has not passed --source option, auto-detect source by comparing Header rows (DONE)
     * Transactions are extracted
-    * User selects 'Budget' in a list fetched from YNAB API
-    * User selects 'Account'
+    * User confirms if transactions should be uploaded
+    * User selects the matching Account in YNAB from a list
     * Transactions are uploaded to YNAB
 
 ## How to install
