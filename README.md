@@ -1,3 +1,10 @@
+# NOTICE: This repo is archived :)
+## Please check out [YNAB Buddy](https://npmjs.org/package/ynab-buddy), which has more features:
+ * works for 70+ banks thanks to bank2ynab
+ * command line tool for batch file conversion
+ * auto-upload transactions to YNAB Accounts
+ * faster!
+
 to-ynab
 ====
 _by @cosminlupu_
